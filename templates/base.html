@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}TITLE GOES HERE{% endblock %}</title>
+    <script src="http://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+    {% block nav %}
+    {% if g.user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+    {% endif %}
+
+    {% if not g.user.is_authenticated %}
+        <ul>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+        </ul>
+    {% endif %}
+    {% endblock %}
+
+    <ul> 
+        {% for message in get_flashed_messages() %} 
+        <li>{{ message }}</li> 
+        {% endfor %} 
+    </ul>
+
+    {% block content %}
+    BLOCK CONTENT
+    {% endblock %}
+</body>
+</html>
