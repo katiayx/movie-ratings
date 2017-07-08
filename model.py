@@ -43,9 +43,13 @@ class Rating(db.Model):
 
 
     rating_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    movie_id = db.Column(db.Integer)
-    user_id = db.Column(db.Integer)
+    movie_id = db.Column(db.Integer, db.ForeignKey('movies.movie_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     score = db.Column(db.Integer)
+
+    movie = db.relationship("Movie", backref=db.backref("ratings"), order_by=rating_id)
+    user = db.relationship("User", backref=db.backref("ratings"), order_by=rating_id)
+    
 
     def __repr__(self):
         """Provides user rating on a movie"""

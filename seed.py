@@ -46,7 +46,7 @@ def load_movies():
 
         #convert it to an actual datetime object.
         if released_str:
-            release_date = datetime.datetime.strptime(released_str, "%d-%b-%Y")
+            release_date = datetime.datetime.strptime(released_str, "%d-%b-%Y").date()
         else:
             release_date = None
 
